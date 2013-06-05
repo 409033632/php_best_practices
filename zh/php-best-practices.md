@@ -97,7 +97,7 @@ PHP是Web世界里的百年老龟，它的壳上铭刻着一段丰富、复杂�
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Include the phpass library
 require_once('phpass-03/PasswordHash.php')
@@ -116,7 +116,7 @@ $hasher->CheckPassword('the wrong password', $hashedPassword);  // false
 
 $hasher->CheckPassword('my super cool password', $hashedPassword);  // true
 ?>
-{% endhighlight %}
+```
 
 **陷阱**
 
@@ -140,7 +140,7 @@ quotes)”函数的组合来实现。PDO使得那堆东西不再需要。
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 try{
     // Create a new connection.
@@ -186,7 +186,7 @@ catch(\PDOException $ex){
     print($ex->getMessage());
 }
 ?>
-{% endhighlight %}
+```
 
 **陷阱**
 
@@ -253,7 +253,7 @@ PHP提供了若干方式来自动加载包含还未加载的类的文件。老�
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // First, define your auto-load function
 function MyAutoload($className){
@@ -270,7 +270,7 @@ spl_autoload_register('MyAutoload');
 // file.
 $var = new MyClass();
 ?>
-{% endhighlight %}
+```
 
 **进一步阅读**
 
@@ -318,7 +318,7 @@ $var = new MyClass();
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Let's see how the two methods treat namespaces
 namespace MiddleEarth\Creatures\Dwarves;
@@ -346,7 +346,7 @@ class OneRing{
     define('SHOW_ELVISH_DEGREES', 200); // Compile error: can't use define() within a class
 }
 ?>
-{% endhighlight %}
+```
 
 因为define()更加灵活，你应该使用它以避免一些令人头疼的事情，除非你明确地需要类
 常量。使用const通常会产生更加可读的代码，但是以牺牲灵活性为代价的。
@@ -394,7 +394,7 @@ APC是集成到PHP核心的，因此你不需要在服务器上维护另一个�
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Store some values in the APC cache.  We can optionally pass a time-to-live, 
 // but in this example the values will live forever until they're garbage-collected by APC.
@@ -413,7 +413,7 @@ if($success !== true) // Note the !==, this checks for true boolean false, not "
  
 apc_delete('username-958'); // This key will no longer be available.
 ?>
-{% endhighlight %}
+```
 
 **陷阱**
 
@@ -557,7 +557,7 @@ Email是一组网络协议，比PHP的历史还曲折。完全可以说发送邮
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Include the PHPMailer library
 require_once('phpmailer-5.1/class.phpmailer.php');
@@ -588,7 +588,7 @@ $mailer->Password = 'my smtp password';
 // All done!
 $mailer->Send();
 ?>
-{% endhighlight %}
+```
 
 
 ## 验证邮件地址
@@ -601,7 +601,7 @@ PHP的内建`filter_val()`函数。
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 filter_var('sgamgee@example.com', FILTER_VALIDATE_EMAIL);
 //Returns "sgamgee@example.com". This is a valid email address.
@@ -609,7 +609,7 @@ filter_var('sgamgee@example.com', FILTER_VALIDATE_EMAIL);
 filter_var('sauron@mordor', FILTER_VALIDATE_EMAIL);
 // Returns boolean false! This is *not* a valid email address.
 ?>
-{% endhighlight %}
+```
 
 **进一步阅读**
 
@@ -652,7 +652,7 @@ htmlentities()不同于类似功能的函数[htmlspecialchars()](http://php.net/
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Oh no!  The user has submitted malicious HTML, and we have to display it in our web app!
 $evilHtml = '<div onclick="xss();">Mua-ha-ha!  Twiddling my evil mustache...</div>';
@@ -663,7 +663,7 @@ $evilHtml = '<div onclick="xss();">Mua-ha-ha!  Twiddling my evil mustache...</di
 $safeHtml = htmlentities($evilHtml, ENT_QUOTES, 'UTF-8');
 // $safeHtml is now fully escaped HTML.  You can output $safeHtml to your users without fear!
 ?>
-{% endhighlight %}
+```
 
 **对于复杂需求的净化**
 
@@ -687,7 +687,7 @@ Purifier高度可定制，允许你为HTML的一个子集建立白名单来允�
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Include the HTML Purifier library
 require_once('htmlpurifier-4.4.0/HTMLPurifier.auto.php');
@@ -701,7 +701,7 @@ $purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
 $safeHtml = $purifier->purify($evilHtml);
 // $safeHtml is now sanitized.  You can output $safeHtml to your users without fear!
 ?>
-{% endhighlight %}
+```
 
 **陷阱**
 
@@ -783,7 +783,7 @@ utf8mb4\`。这是至关重要的。示例
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Tell PHP that we're using UTF-8 strings until the end of the script
 mb_internal_encoding('UTF-8');
@@ -838,7 +838,7 @@ $result = $handle->fetchAll(\PDO::FETCH_OBJ);
         ?>
     </body>
 </html>
-{% endhighlight %}
+```
 
 **进一步阅读**
 
@@ -865,7 +865,7 @@ $result = $handle->fetchAll(\PDO::FETCH_OBJ);
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 // Construct a new UTC date.  Always specify UTC unless you really know what you're doing!
 $date = new DateTime('2011-05-04 05:00:00', new DateTimeZone('UTC'));
@@ -893,7 +893,7 @@ $difference = $date->diff($later);
  
 echo('The 2nd date is ' . $difference['days'] . ' later than 1st date.');
 ?>
-{% endhighlight %}
+```
 
 **陷阱**
 
@@ -930,7 +930,7 @@ PHP宽松的类型系统提供了许多不同的方法来检测一个变量的�
 
 **示例**
 
-{% highlight php %}
+```php
 <?php
 $x = 0;
 $y = null;
@@ -956,7 +956,7 @@ if(strpos('abc', 'a'))
 if(strpos('abc', 'a') !== false)
     print('Found it for real this time!');
 ?>
-{% endhighlight %}
+```
 
 **陷阱**
 
